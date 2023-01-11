@@ -1,0 +1,26 @@
+import json
+from bs4 import BeautifulSoup
+
+def html_to_json(file_path):
+    # Open the HTML file
+    with open(file_path, 'r') as file:
+        html = file.read()
+
+    # Use BeautifulSoup to parse the HTML
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Convert the parsed HTML into a JSON object
+    data = json.loads(soup.prettify())
+
+    return data
+
+file_path = input("Enter the file path of the HTML file: ")
+data = html_to_json(file_path)
+
+# Saving the json file
+path, ext = os.path.splitext(file_path)
+json_file_path = path + '.json'
+with open(json_file_path, 'w') as json_file:
+    json.dump(data, json_file)
+
+print(f"JSON file saved as {json_file_path}")
